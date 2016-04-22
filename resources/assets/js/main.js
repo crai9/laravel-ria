@@ -5,6 +5,7 @@ var socket = io('http://192.168.10.10:3000');
 socket.on('test-channel:Notification', function(data){
     toastr.success(data);
 });
+
 if(Cookies.get('authToken')){
 
     $.ajax({
@@ -21,11 +22,13 @@ if(Cookies.get('authToken')){
             $('#tabLogin').hide();
             $('#tabBasket').show();
             $('#userDropDown').show();
+            $('.add-to-basket').show();
             loggedIn = true;
         })
         .fail(function(data){
 
             $('#userDropDown').hide();
+            $('.add-to-basket').hide();
 
         })
 
@@ -33,6 +36,7 @@ if(Cookies.get('authToken')){
 
     $('#userDropDown').hide();
     $('#tabLogin').show();
+    $('.add-to-basket').hide();
 
 }
 
@@ -100,6 +104,9 @@ $('#logout').on('click', function(event){
             $('#tabBasket').hide();
             $('#tabHome').tab('show');
             $('.basket-list').html('');
+            $('.add-to-basket').hide();
+
+
 
             loggedIn = false;
         });

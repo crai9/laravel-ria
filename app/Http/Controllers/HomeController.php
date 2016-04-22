@@ -20,7 +20,6 @@ class HomeController extends Controller
 
     public function notification(Request $request){
 
-
         Redis::publish('test-channel', json_encode([
             'event' => 'Notification',
             'data' => $request->message

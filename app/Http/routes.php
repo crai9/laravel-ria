@@ -1,9 +1,11 @@
 <?php
 
 Route::get('/', 'HomeController@index');
+Route::post('/', 'BillingController@post');
 
 Route::group(['prefix' => '/api'], function () {
 
+    Route::post('/pay', 'BillingController@post');
     Route::resource('products', 'ProductController');
     Route::get('random', 'ProductController@random');
     Route::get('notify', 'HomeController@notification');

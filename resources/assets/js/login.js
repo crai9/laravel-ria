@@ -42,6 +42,7 @@ $('#signinForm').submit(function(event){
                     $('#tabLogin').hide();
                     $('#userDropDown').show();
                     $('#tabBasket').show();
+                    $('.add-to-basket').show();
                     loggedIn = true;
                     updateBasket();
                 })

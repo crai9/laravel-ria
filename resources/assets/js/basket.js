@@ -37,13 +37,42 @@ var updateBasket = function(){
 
             $('.basket-total').html('<h4>Total price: £' + totalPrice.toFixed(2) + '</h4>');
 
-
         })
+
 }
 
-$('#check-out').on('click', function(){
-    toastr.error('Not implemented');
-});
+
+$('#cardPayment').get(0).submit = function() {
+    var data = $(this).serializeArray();
+
+
+    console.log(data);
+
+    $.ajax({
+            type: 'POST',
+            url: '/api/pay',
+            data: {
+                stripeToken: data[0].value,
+                stripeTokenType: data[1].value,
+                stripeEmail: data[2].value,
+            },
+            beforeSend:  function(xhr) {
+                console.log('here');
+                xhr.setRequestHeader('Accept', 'application/json');
+                xhr.setRequestHeader('Authorization', 'Bearer ' + Cookies.get('authToken'));
+            }
+        })
+        .done(function(data){
+
+            toastr.success('Payment sent');
+            updateBasket();
+
+        })
+
+    // Prevent form submit.
+    return false;
+}
+
 $(document.body).on('click', '.basket-item', function(){
 
     var product_id = $(this).attr('product-id');

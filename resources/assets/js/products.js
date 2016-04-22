@@ -65,6 +65,12 @@ var updateProducts = function(page){
                 renderProduct(products[i]);
             }
 
+            if(loggedIn){
+                $('.add-to-basket').show();
+            } else {
+                $('.add-to-basket').hide();
+            }
+
         })
 }
 
